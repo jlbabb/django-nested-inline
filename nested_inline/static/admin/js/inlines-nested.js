@@ -40,7 +40,7 @@
         // Only show the add button if we are allowed to add more items,
         // note that max_num = None translates to a blank string.
         var showAddButton = get_max_forms(options.prefix) === '' || (get_max_forms(options.prefix) - get_no_forms(options.prefix)) > 0;
-        if (showAddButton) {
+        if ($this.length && showAddButton) {
             var addButton;
             if ($this.attr("tagName") == "TR") {
                 // If forms are laid out as table rows, insert the
