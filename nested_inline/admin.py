@@ -145,7 +145,7 @@ class NestedModelAdmin(admin.ModelAdmin):
         return True
 
     @csrf_protect_m
-    @transaction.atomic
+    @transaction.commit_on_success
     def add_view(self, request, form_url='', extra_context=None):
         "The 'add' admin view for this model."
         model = self.model
@@ -249,7 +249,7 @@ class NestedModelAdmin(admin.ModelAdmin):
         return self.render_change_form(request, context, form_url=form_url, add=True)
 
     @csrf_protect_m
-    @transaction.atomic
+    @transaction.commit_on_success
     def change_view(self, request, object_id, form_url='', extra_context=None):
         "The 'change' admin view for this model."
         model = self.model
