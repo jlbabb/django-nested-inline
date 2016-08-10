@@ -42,6 +42,10 @@ class NestedModelAdmin(admin.ModelAdmin):
 
         return inline_instances
 
+    def get_formsets_with_inlines(self, request, obj=None):
+        for inline in self.get_inline_instances(request):
+            yield inline.get_formset(request, obj), inline
+
     def save_formset(self, request, form, formset, change):
         """
         Given an inline formset save it to the database.
