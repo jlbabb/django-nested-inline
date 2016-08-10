@@ -20,11 +20,7 @@
   {{ inline_admin_form.fk_field.field }}
   {% if inline_admin_form.form.nested_formsets %}
     {% for inline_admin_formset in inline_admin_form.form.nested_formsets %}
-      {% if inline_admin_formset.opts.template == stacked_template %}
-        {% include stacked_template with prev_prefix=recursive_formset.formset.prefix loopCounter=forloop.parentloop.counter0 %}
-      {% else %}
-        {% include tabular_template with prev_prefix=recursive_formset.formset.prefix loopCounter=forloop.parentloop.counter0 %}
-      {% endif %}
+      {% include inline_admin_formset.opts.template with prev_prefix=recursive_formset.formset.prefix loopCounter=forloop.parentloop.counter0 %}
       <div class="nested-inline-bottom-border"></div>
     {% endfor %}
   {% endif %}

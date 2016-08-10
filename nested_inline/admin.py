@@ -180,7 +180,7 @@ class NestedModelAdmin(admin.ModelAdmin):
                     save_as_new="_saveasnew" in request.POST,
                     prefix=prefix, queryset=inline.queryset(request))
                 formsets.append(formset)
-                if inline.inlines:
+                if hasattr(inline, 'inlines') and inline.inlines:
                     self.add_nested_inline_formsets(request, inline, formset)
             if self.all_valid_with_nesting(formsets) and form_validated:
                 self.save_model(request, new_object, form, False)
