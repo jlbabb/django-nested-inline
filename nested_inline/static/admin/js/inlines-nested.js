@@ -42,7 +42,7 @@
         var showAddButton = get_max_forms(options.prefix) === '' || (get_max_forms(options.prefix) - get_no_forms(options.prefix)) > 0;
         if ($this.length && showAddButton) {
             var addButton;
-            if ($this.attr("tagName") == "TR") {
+            if ($this.attr("tagName") == "TR" || $this.prop("tagName") == "TR") {
                 // If forms are laid out as table rows, insert the
                 // "add" button in a new table row:
                 var numCols = this.eq(-1).children().length;
@@ -441,11 +441,11 @@
 
     // This returns the amount of forms in the given formset
     function get_no_forms(formset_prefix) {
-        formset_prop = $("#id_" + formset_prefix + "-TOTAL_FORMS")
+		var formset_prop = $("#id_" + formset_prefix + "-TOTAL_FORMS");
         if (!formset_prop.length) {
             return 0;
         }
-        return parseInt(formset_prop.attr("autocomplete", "off").val());
+		return parseInt(formset_prop.attr("autocomplete", "off").val(), 10);
     }
 
     function change_no_forms(formset_prefix, increase) {
@@ -460,7 +460,7 @@
     // This return the maximum amount of forms in the given formset
     function get_max_forms(formset_prefix) {
         var max_forms = $("#id_" + formset_prefix + "-MAX_NUM_FORMS").attr("autocomplete", "off").val();
-        if ( typeof max_forms == 'undefined') {
+		if ( typeof max_forms == 'undefined' || max_forms == '') {
             return '';
         }
         return parseInt(max_forms);
